@@ -5,17 +5,17 @@ using System.Linq;
 
 namespace PromotionEngine
 {
-    public class ProductManager
+    public class ProductManager : IProductManager
     {
         public static List<Product> Products { get; set; }
         public ProductManager()
         {
             CreateProducts();
         }
-        public void CreateProducts()
+        private void CreateProducts()
         {
             Products = new List<Product>
-            { 
+            {
                 new Product { Name = "A", UnitPrice = 50 },
                 new Product { Name = "B", UnitPrice = 30 },
                 new Product { Name = "C", UnitPrice = 20 },

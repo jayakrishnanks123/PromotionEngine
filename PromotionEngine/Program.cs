@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace PromotionEngine
 {
@@ -6,6 +7,12 @@ namespace PromotionEngine
     {
         static void Main(string[] args)
         {
+            var serviceProvider = new ServiceCollection()
+           .AddScoped<IPromotionManager, PromotionManager>()
+           .AddScoped<IProductManager, ProductManager>()
+           .AddScoped<ICheckOut, Checkout>()
+
+           .BuildServiceProvider();
             Console.WriteLine("Hello World!");
         }
     }

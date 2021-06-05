@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace PromotionEngine
 {
-    public class PromotionManager
+    public class PromotionManager:IPromotionManager
     {
-        public List<Promotion> Promotions { get; set; }
+        public List<IPromotion> Promotions { get; set; }
 
         public PromotionManager()
         {
-            Promotions = new List<Promotion>()
+            Promotions = new List<IPromotion>()
             {
                 new Promotion { ProductNames = new List<string> { "A" }, Count = 3, SalePrice = 130 },
                 new Promotion { ProductNames = new List<string> { "B" }, Count = 2, SalePrice= 45 },
@@ -49,9 +49,9 @@ namespace PromotionEngine
                         if (products.ContainsKey(name))
                             products[name] = products[name] - productCount;
                     }
-                    var promoOrder = orders.FirstOrDefault(x => x.Name == names[names.Count - 1]);
-                    if (promoOrder != null)
-                        promoOrder.SalePrice+= (productCount * promotion.SalePrice);
+                    var order = orders.FirstOrDefault(x => x.Name == names[names.Count - 1]);
+                    if (order != null)
+                        order.SalePrice+= (productCount * promotion.SalePrice);
                 }
 
             }

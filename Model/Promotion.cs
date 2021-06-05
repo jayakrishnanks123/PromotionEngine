@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    public class Promotion
+    public class Promotion : IPromotion
     {
         public IList<string> ProductNames { get; set; }
         public bool IsCombo { get; set; }
