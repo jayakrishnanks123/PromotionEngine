@@ -1,19 +1,35 @@
 ﻿using Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PromotionEngine
 {
-    internal class ProductManager
+    public class ProductManager
     {
-        internal List<Product> CreateOrder(List<Product> products)
+        public static List<Product> Products { get; set; }
+        public ProductManager()
         {
-            return new List<Product>
-            {
-                new Product{ Name = "A"},
-                new Product{ Name = "B"},
-                new Product {Name = "C" } ,
+            CreateProducts();
+        }
+        public void CreateProducts()
+        {
+            Products = new List<Product>
+            { 
+                new Product { Name = "A", UnitPrice = 50 },
+                new Product { Name = "B", UnitPrice = 30 },
+                new Product { Name = "C", UnitPrice = 20 },
+                new Product { Name = "D", UnitPrice = 15 }
             };
+        }
+
+        public List<Product> CreateOrder(List<Product> products)
+        {
+            foreach (var item in products)
+            {
+                item.UnitPrice = Products.First(o => o.Name == item.Name).UnitPrice;
+            }
+            return products;
         }
     }
 }
