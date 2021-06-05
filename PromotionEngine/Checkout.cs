@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace PromotionEngineTests
+namespace PromotionEngine
 {
-    internal class Checkout
+    public class Checkout
     {
         ProductManager productManager = new ProductManager();
         PromotionManager promoEngine = new PromotionManager();
@@ -13,7 +13,7 @@ namespace PromotionEngineTests
         {
         }
 
-        internal List<Product> CheckoutProducts(List<Product> products)
+        public List<Product> CheckoutProducts(List<Product> products)
         {
             var order = productManager.CreateOrder(products);
             order = promoEngine.ApplyDiscount(order);

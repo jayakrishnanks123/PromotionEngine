@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
+using PromotionEngine;
 using System.Collections.Generic;
 
 namespace PromotionEngineTests

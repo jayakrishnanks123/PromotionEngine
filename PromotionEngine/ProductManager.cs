@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PromotionEngineTests
+namespace PromotionEngine
 {
     internal class ProductManager
     {
