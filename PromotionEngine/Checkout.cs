@@ -7,7 +7,7 @@ namespace PromotionEngine
     public class Checkout
     {
         ProductManager productManager = new ProductManager();
-        PromotionManager promoEngine = new PromotionManager();
+        PromotionManager promotionManager = new PromotionManager();
 
         public Checkout()
         {
@@ -16,7 +16,7 @@ namespace PromotionEngine
         public List<Product> CheckoutProducts(List<Product> products)
         {
             var order = productManager.CreateOrder(products);
-            order = promoEngine.ApplyDiscount(order);
+            order = promotionManager.ApplyDiscount(order);
             return order;
         }
     }
