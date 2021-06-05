@@ -15,6 +15,7 @@ namespace PromotionEngineTests
         public void Init()
         {
             provider = new ServiceCollection()
+               .AddScoped<IPromotionRepository, PromotionRepository>()
                .AddScoped<IPromotionManager, PromotionManager>()
                .AddScoped<IProductManager, ProductManager>()
                .AddScoped<ICheckOut, Checkout>()

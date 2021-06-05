@@ -9,7 +9,7 @@ namespace Model
         public IList<string> ProductNames { get; set; }
         public bool IsCombo { get; set; }
         public int SalePrice { get; set; }
-        public int Count { get; set; }
+        public int ProductCount { get; set; }
     }
 
 }
