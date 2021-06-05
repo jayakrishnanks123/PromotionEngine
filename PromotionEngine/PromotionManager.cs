@@ -15,7 +15,7 @@ namespace PromotionEngine
             {
                 new Promotion { ProductNames = new List<string> { "A" }, Count = 3, SalePrice = 130 },
                 new Promotion { ProductNames = new List<string> { "B" }, Count = 2, SalePrice= 45 },
-                new Promotion { ProductNames = new List<string> { "C", "D" }, IsCombo= true, SalePrice= 30 }
+                new Promotion { ProductNames = new List<string> { "C", "D" }, IsCombo= true, SalePrice= 30,Count=2 }
             };
         }
 
@@ -26,11 +26,37 @@ namespace PromotionEngine
                 .Select(g => new { Product = g.Key, Quantity = g.Sum(q => q.Quantity) })
                 .ToDictionary(x => x.Product, y => y.Quantity);
 
-            ApplySinglePromotion(orders, products);
+            ApplySingleDiscount(orders, products);
+            ApplyMultipleDiscount(orders,products);
             UpdateSalePrice(orders, products);
             return orders;
         }
-        private void ApplySinglePromotion(IList<Product> orders, Dictionary<string, int> products)
+        private void ApplyMultipleDiscount(IList<Product> orders, Dictionary<string, int> products)
+        {
+            foreach (var promotion in Promotions.Where(x => x.IsCombo))
+            {
+                var names = promotion.ProductNames;
+
+                var eligibleProducts = products.Where(x => names.Contains(x.Key));
+                if (eligibleProducts.Count() < promotion.Count) return;
+
+                var productCount = eligibleProducts.Min(x => x.Value);
+
+                if (productCount > 0)
+                {
+                    foreach (var name in names)
+                    {
+                        if (products.ContainsKey(name))
+                            products[name] = products[name] - productCount;
+                    }
+                    var promoOrder = orders.FirstOrDefault(x => x.Name == names[names.Count - 1]);
+                    if (promoOrder != null)
+                        promoOrder.SalePrice+= (productCount * promotion.SalePrice);
+                }
+
+            }
+        }
+        private void ApplySingleDiscount(IList<Product> orders, Dictionary<string, int> products)
         {
             foreach (var promotion in Promotions.Where(x => !x.IsCombo))
             {

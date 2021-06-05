@@ -22,5 +22,18 @@ namespace PromotionEngine.Tests
             var response=manager.ApplyDiscount(orders);
             Assert.AreEqual(130, response.First().SalePrice);
         }
+        [TestMethod()]
+        public void ApplyMultipleDiscountTest()
+        {
+            PromotionManager manager = new PromotionManager();
+            var orders = new List<Product>
+            {
+                new Product{ Name = "C", Quantity = 1,UnitPrice=20},
+                new Product{ Name = "D", Quantity = 1,UnitPrice=15}
+            };
+            var response = manager.ApplyDiscount(orders);
+            Assert.AreEqual(0, response[0].SalePrice);
+            Assert.AreEqual(30, response[1].SalePrice);
+        }
     }
 }
