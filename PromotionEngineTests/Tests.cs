@@ -10,13 +10,13 @@ namespace PromotionEngineTests
         [TestMethod]
         public void Test1()
         {
-            var Orders = new List<Product>
+            var products = new List<Product>
             {
                 new Product{ Name = "A", Quantity = 1},
                 new Product{ Name = "B", Quantity = 1},
                 new Product {Name = "C", Quantity=1}
             };
-            var response= new Checkout().CheckoutProducts(Orders);
+            var response= new Checkout().CheckoutProducts(products);
 
             Assert.AreEqual(response[0].SalePrice, 50);
             Assert.AreEqual(response[1].SalePrice, 30);

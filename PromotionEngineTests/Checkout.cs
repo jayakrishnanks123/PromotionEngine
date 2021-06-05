@@ -6,18 +6,18 @@ namespace PromotionEngineTests
 {
     internal class Checkout
     {
+        ProductManager productManager = new ProductManager();
+        PromotionManager promoEngine = new PromotionManager();
+
         public Checkout()
         {
         }
 
-        internal List<Product> CheckoutProducts(List<Product> orders)
+        internal List<Product> CheckoutProducts(List<Product> products)
         {
-            return new List<Product>
-            {
-                new Product{ Name = "A", SalePrice = 50},
-                new Product{ Name = "B", SalePrice= 30},
-                new Product {Name = "C", SalePrice=20}
-            };
+            var order = productManager.CreateOrder(products);
+            order = promoEngine.ApplyDiscount(order);
+            return order;
         }
     }
 }
